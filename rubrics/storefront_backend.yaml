@@ -1,4 +1,4 @@
-project_name: Storefront Backend
+﻿project_name: Storefront Backend
 
 sections:
   - id: readme_setup
@@ -42,7 +42,7 @@ sections:
           - database port
         description: README documents backend and database ports
     pass_feedback: |
-      > **Passing ✅** — README setup instructions are clear enough for a reviewer to install, configure, and start the project.
+      > **Passing âœ…** â€” README setup instructions are clear enough for a reviewer to install, configure, and start the project.
 
       ## General Feedback
 
@@ -50,9 +50,9 @@ sections:
 
       ## Requirement Status
 
-      - **Package installation instructions:** ✔ The README includes installation guidance such as `npm install`, `yarn install`, or an equivalent command.
-      - **Database setup and connection:** ✔ The README includes database-related setup details for PostgreSQL, `psql`, `db-migrate`, or the project database configuration.
-      - **Backend and database ports:** ✔ Port information is documented so the reviewer knows where the API and database are expected to run.
+      - **Package installation instructions:** âœ” The README includes installation guidance such as `npm install`, `yarn install`, or an equivalent command.
+      - **Database setup and connection:** âœ” The README includes database-related setup details for PostgreSQL, `psql`, `db-migrate`, or the project database configuration.
+      - **Backend and database ports:** âœ” Port information is documented so the reviewer knows where the API and database are expected to run.
 
       ## Recommendations
 
@@ -65,7 +65,7 @@ sections:
       - PostgreSQL documentation: https://www.postgresql.org/docs/current/
       - node-postgres getting started: https://node-postgres.com/
     fail_feedback: |
-      > **Not Passing ❌** — README setup instructions do not yet fully meet the project requirements.
+      > **Not Passing âŒ** â€” README setup instructions do not yet fully meet the project requirements.
 
       ## General Feedback
 
@@ -73,9 +73,9 @@ sections:
 
       ## Requirement Status
 
-      - **Package installation instructions:** ❌ Add a clear command such as `npm install`, `yarn install`, or `pnpm install`.
-      - **Database setup and connection:** ❌ Document how to create/connect to the PostgreSQL database and how migrations should be run.
-      - **Backend and database ports:** ❌ Document the backend API port and PostgreSQL database port.
+      - **Package installation instructions:** âŒ Add a clear command such as `npm install`, `yarn install`, or `pnpm install`.
+      - **Database setup and connection:** âŒ Document how to create/connect to the PostgreSQL database and how migrations should be run.
+      - **Backend and database ports:** âŒ Document the backend API port and PostgreSQL database port.
 
       ## Recommendations
 
@@ -110,7 +110,7 @@ sections:
           - orders
         description: REQUIREMENTS.md documents required REST routes and verbs
     pass_feedback: |
-      > **Passing ✅** — API route information is documented with RESTful endpoints and HTTP verbs.
+      > **Passing âœ…** â€” API route information is documented with RESTful endpoints and HTTP verbs.
 
       ## General Feedback
 
@@ -118,9 +118,9 @@ sections:
 
       ## Requirement Status
 
-      - **RESTful routes listed:** ✔ Required endpoint groups such as products, users, and orders are documented.
-      - **HTTP verbs included:** ✔ Routes are associated with HTTP verbs such as `GET` and `POST`.
-      - **Reviewer usability:** ✔ The route information gives reviewers a clear checklist for endpoint testing.
+      - **RESTful routes listed:** âœ” Required endpoint groups such as products, users, and orders are documented.
+      - **HTTP verbs included:** âœ” Routes are associated with HTTP verbs such as `GET` and `POST`.
+      - **Reviewer usability:** âœ” The route information gives reviewers a clear checklist for endpoint testing.
 
       ## Recommendations
 
@@ -133,7 +133,7 @@ sections:
       - MDN HTTP request methods: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
       - REST resource naming guide: https://restfulapi.net/resource-naming/
     fail_feedback: |
-      > **Not Passing ❌** — `REQUIREMENTS.md` does not yet provide enough API route information.
+      > **Not Passing âŒ** â€” `REQUIREMENTS.md` does not yet provide enough API route information.
 
       ## General Feedback
 
@@ -141,9 +141,9 @@ sections:
 
       ## Requirement Status
 
-      - **RESTful routes listed:** ❌ Add the required product, user, and order endpoints.
-      - **HTTP verbs included:** ❌ Each route needs its corresponding verb, such as `GET`, `POST`, `PUT`, or `DELETE`.
-      - **Reviewer usability:** ❌ The route documentation is not yet complete enough to verify endpoint coverage.
+      - **RESTful routes listed:** âŒ Add the required product, user, and order endpoints.
+      - **HTTP verbs included:** âŒ Each route needs its corresponding verb, such as `GET`, `POST`, `PUT`, or `DELETE`.
+      - **Reviewer usability:** âŒ The route documentation is not yet complete enough to verify endpoint coverage.
 
       ## Recommendations
 
@@ -188,7 +188,7 @@ sections:
           - product orders
         description: REQUIREMENTS.md documents the orders-to-products relationship table
     pass_feedback: |
-      > **Passing ✅** — The database schema is documented with tables, columns, types, and relationships.
+      > **Passing âœ…** â€” The database schema is documented with tables, columns, types, and relationships.
 
       ## General Feedback
 
@@ -196,9 +196,9 @@ sections:
 
       ## Requirement Status
 
-      - **Tables documented:** ✔ Required tables such as users, products, orders, and the order/product relationship table are represented.
-      - **Columns and types included:** ✔ The schema includes column names and data types.
-      - **Relationships addressed:** ✔ The order-to-products relationship is documented.
+      - **Tables documented:** âœ” Required tables such as users, products, orders, and the order/product relationship table are represented.
+      - **Columns and types included:** âœ” The schema includes column names and data types.
+      - **Relationships addressed:** âœ” The order-to-products relationship is documented.
 
       ## Recommendations
 
@@ -211,7 +211,7 @@ sections:
       - PostgreSQL constraints: https://www.postgresql.org/docs/current/ddl-constraints.html
       - PostgreSQL data types: https://www.postgresql.org/docs/current/datatype.html
     fail_feedback: |
-      > **Not Passing ❌** — The database schema in `REQUIREMENTS.md` is incomplete or missing.
+      > **Not Passing âŒ** â€” The database schema in `REQUIREMENTS.md` is incomplete or missing.
 
       ## General Feedback
 
@@ -219,9 +219,9 @@ sections:
 
       ## Requirement Status
 
-      - **Tables documented:** ❌ Add the required tables such as users, products, orders, and an order/product relationship table.
-      - **Columns and types included:** ❌ Include each required column and its PostgreSQL type.
-      - **Relationships addressed:** ❌ Document how orders connect to products, including foreign keys or join table columns.
+      - **Tables documented:** âŒ Add the required tables such as users, products, orders, and an order/product relationship table.
+      - **Columns and types included:** âŒ Include each required column and its PostgreSQL type.
+      - **Relationships addressed:** âŒ Document how orders connect to products, including foreign keys or join table columns.
 
       ## Recommendations
 
@@ -264,7 +264,7 @@ sections:
         mode: any
         description: package.json includes dotenv for database configuration
     pass_feedback: |
-      > **Passing ✅** — The project includes evidence of a PostgreSQL database connection.
+      > **Passing âœ…** â€” The project includes evidence of a PostgreSQL database connection.
 
       ## General Feedback
 
@@ -272,9 +272,9 @@ sections:
 
       ## Requirement Status
 
-      - **PostgreSQL client dependency:** ✔ The project includes `pg` for PostgreSQL access from Node.
-      - **Database configuration:** ✔ A database configuration or client file is present.
-      - **Environment-driven setup:** ✔ Database credentials can be managed through environment variables.
+      - **PostgreSQL client dependency:** âœ” The project includes `pg` for PostgreSQL access from Node.
+      - **Database configuration:** âœ” A database configuration or client file is present.
+      - **Environment-driven setup:** âœ” Database credentials can be managed through environment variables.
 
       ## Recommendations
 
@@ -287,7 +287,7 @@ sections:
       - node-postgres pooling: https://node-postgres.com/features/pooling
       - dotenv package documentation: https://www.npmjs.com/package/dotenv
     fail_feedback: |
-      > **Not Passing ❌** — The project does not yet show enough evidence of a working PostgreSQL connection.
+      > **Not Passing âŒ** â€” The project does not yet show enough evidence of a working PostgreSQL connection.
 
       ## General Feedback
 
@@ -295,9 +295,9 @@ sections:
 
       ## Requirement Status
 
-      - **PostgreSQL client dependency:** ❌ Add `pg` or otherwise make the PostgreSQL connection implementation clear.
-      - **Database configuration:** ❌ Include a database client/configuration module, commonly named `database.ts`, `client.ts`, `db.ts`, or similar.
-      - **Environment-driven setup:** ❌ Use environment variables for database credentials rather than hardcoded values.
+      - **PostgreSQL client dependency:** âŒ Add `pg` or otherwise make the PostgreSQL connection implementation clear.
+      - **Database configuration:** âŒ Include a database client/configuration module, commonly named `database.ts`, `client.ts`, `db.ts`, or similar.
+      - **Environment-driven setup:** âŒ Use environment variables for database credentials rather than hardcoded values.
 
       ## Recommendations
 
@@ -336,7 +336,7 @@ sections:
           - product_orders
         description: Migration files reference required tables
     pass_feedback: |
-      > **Passing ✅** — The database design includes evidence of the required relational tables.
+      > **Passing âœ…** â€” The database design includes evidence of the required relational tables.
 
       ## General Feedback
 
@@ -344,9 +344,9 @@ sections:
 
       ## Requirement Status
 
-      - **Required tables:** ✔ Migration evidence exists for the project tables.
-      - **Relationships:** ✔ The schema includes evidence for order/product relationships.
-      - **Reviewability:** ✔ The migrations give reviewers a concrete source for table and column verification.
+      - **Required tables:** âœ” Migration evidence exists for the project tables.
+      - **Relationships:** âœ” The schema includes evidence for order/product relationships.
+      - **Reviewability:** âœ” The migrations give reviewers a concrete source for table and column verification.
 
       ## Recommendations
 
@@ -359,7 +359,7 @@ sections:
       - PostgreSQL constraints: https://www.postgresql.org/docs/current/ddl-constraints.html
       - PostgreSQL lexical structure and keywords: https://www.postgresql.org/docs/current/sql-syntax-lexical.html
     fail_feedback: |
-      > **Not Passing ❌** — The relational database design is missing or incomplete.
+      > **Not Passing âŒ** â€” The relational database design is missing or incomplete.
 
       ## General Feedback
 
@@ -367,9 +367,9 @@ sections:
 
       ## Requirement Status
 
-      - **Required tables:** ❌ Add migrations for users, products, orders, and order/product relationship data.
-      - **Relationships:** ❌ Add foreign keys or relationship columns that connect orders to users and products.
-      - **Reviewability:** ❌ Reviewers need migration files or clear schema files to verify the database structure.
+      - **Required tables:** âŒ Add migrations for users, products, orders, and order/product relationship data.
+      - **Relationships:** âŒ Add foreign keys or relationship columns that connect orders to users and products.
+      - **Reviewability:** âŒ Reviewers need migration files or clear schema files to verify the database structure.
 
       ## Recommendations
 
@@ -407,8 +407,34 @@ sections:
           - pg
         mode: any
         description: package.json includes PostgreSQL client dependency
+
+      - id: crud_sql_keywords
+        type: code_contains_all_patterns
+        patterns:
+          - SELECT
+          - INSERT
+          - UPDATE
+          - DELETE
+          - WHERE
+        file_patterns:
+          - "**/*.ts"
+          - "**/*.js"
+          - "**/*.sql"
+        description: Source code contains expected SQL CRUD query keywords
+
+      - id: parameterized_sql
+        type: code_contains_pattern
+        patterns:
+          - "$1"
+          - "$2"
+        mode: any
+        file_patterns:
+          - "**/*.ts"
+          - "**/*.js"
+          - "**/*.sql"
+        description: SQL queries show evidence of parameterized placeholders
     pass_feedback: |
-      > **Passing ✅** — The project includes evidence of SQL-backed CRUD model actions.
+      > **Passing âœ…** â€” The project includes evidence of SQL-backed CRUD model actions.
 
       ## General Feedback
 
@@ -416,9 +442,9 @@ sections:
 
       ## Requirement Status
 
-      - **Select queries:** ✔ Model/data-access files are present for retrieving data.
-      - **Create/update/delete queries:** ✔ The project structure supports CRUD query review.
-      - **Where/single-item queries:** ✔ Required models can be checked for single-record lookup logic.
+      - **Select queries:** âœ” Model/data-access files are present for retrieving data.
+      - **Create/update/delete queries:** âœ” The project structure supports CRUD query review.
+      - **Where/single-item queries:** âœ” Required models can be checked for single-record lookup logic.
 
       ## Recommendations
 
@@ -433,7 +459,7 @@ sections:
       - PostgreSQL `UPDATE`: https://www.postgresql.org/docs/current/sql-update.html
       - PostgreSQL `DELETE`: https://www.postgresql.org/docs/current/sql-delete.html
     fail_feedback: |
-      > **Not Passing ❌** — SQL CRUD query evidence is missing or incomplete.
+      > **Not Passing âŒ** â€” SQL CRUD query evidence is missing or incomplete.
 
       ## General Feedback
 
@@ -441,9 +467,9 @@ sections:
 
       ## Requirement Status
 
-      - **Select queries:** ❌ Add model methods that retrieve all records and individual records.
-      - **Create/update/delete queries:** ❌ Add the required SQL actions for each model.
-      - **Where/single-item queries:** ❌ Add parameterized `WHERE` queries for routes like `/:id`.
+      - **Select queries:** âŒ Add model methods that retrieve all records and individual records.
+      - **Create/update/delete queries:** âŒ Add the required SQL actions for each model.
+      - **Where/single-item queries:** âŒ Add parameterized `WHERE` queries for routes like `/:id`.
 
       ## Recommendations
 
@@ -481,7 +507,7 @@ sections:
         pattern: "migrations/**/*"
         description: migration files exist
     pass_feedback: |
-      > **Passing ✅** — Database migrations are present and configured for schema creation.
+      > **Passing âœ…** â€” Database migrations are present and configured for schema creation.
 
       ## General Feedback
 
@@ -489,9 +515,9 @@ sections:
 
       ## Requirement Status
 
-      - **Migration tooling:** ✔ `db-migrate` and/or `db-migrate-pg` is included.
-      - **Migration files:** ✔ Migration files are present in the project.
-      - **Database reproducibility:** ✔ Reviewers have a migration path to create the database schema.
+      - **Migration tooling:** âœ” `db-migrate` and/or `db-migrate-pg` is included.
+      - **Migration files:** âœ” Migration files are present in the project.
+      - **Database reproducibility:** âœ” Reviewers have a migration path to create the database schema.
 
       ## Recommendations
 
@@ -505,7 +531,7 @@ sections:
       - db-migrate PostgreSQL driver: https://www.npmjs.com/package/db-migrate-pg
       - PostgreSQL `CREATE TABLE`: https://www.postgresql.org/docs/current/sql-createtable.html
     fail_feedback: |
-      > **Not Passing ❌** — Database migrations are missing or not clearly configured.
+      > **Not Passing âŒ** â€” Database migrations are missing or not clearly configured.
 
       ## General Feedback
 
@@ -513,9 +539,9 @@ sections:
 
       ## Requirement Status
 
-      - **Migration tooling:** ❌ Add `db-migrate` and `db-migrate-pg` or make the migration workflow clear.
-      - **Migration files:** ❌ Add migration files for the required tables and columns.
-      - **Database reproducibility:** ❌ Reviewers need to be able to run `db-migrate up` successfully from a clean database.
+      - **Migration tooling:** âŒ Add `db-migrate` and `db-migrate-pg` or make the migration workflow clear.
+      - **Migration files:** âŒ Add migration files for the required tables and columns.
+      - **Database reproducibility:** âŒ Reviewers need to be able to run `db-migrate up` successfully from a clean database.
 
       ## Recommendations
 
@@ -548,8 +574,18 @@ sections:
           - user
           - users
         description: User-related files exist for password handling review
+
+      - id: bcrypt_hash_and_compare_used
+        type: code_contains_all_patterns
+        patterns:
+          - bcrypt.hash
+          - bcrypt.compare
+        file_patterns:
+          - "**/*.ts"
+          - "**/*.js"
+        description: Source code uses bcrypt hash and compare calls
     pass_feedback: |
-      > **Passing ✅** — User passwords are handled with bcrypt-based hashing.
+      > **Passing âœ…** â€” User passwords are handled with bcrypt-based hashing.
 
       ## General Feedback
 
@@ -557,9 +593,9 @@ sections:
 
       ## Requirement Status
 
-      - **bcrypt dependency:** ✔ The project includes `bcrypt` or `bcryptjs`.
-      - **User password handling:** ✔ User-related files are present for reviewing hash usage.
-      - **Plain text protection:** ✔ The expected implementation is to store hashes, not raw passwords.
+      - **bcrypt dependency:** âœ” The project includes `bcrypt` or `bcryptjs`.
+      - **User password handling:** âœ” User-related files are present for reviewing hash usage.
+      - **Plain text protection:** âœ” The expected implementation is to store hashes, not raw passwords.
 
       ## Recommendations
 
@@ -573,7 +609,7 @@ sections:
       - bcryptjs npm package: https://www.npmjs.com/package/bcryptjs
       - OWASP password storage cheat sheet: https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
     fail_feedback: |
-      > **Not Passing ❌** — Password hashing with bcrypt is missing or not clear.
+      > **Not Passing âŒ** â€” Password hashing with bcrypt is missing or not clear.
 
       ## General Feedback
 
@@ -581,9 +617,9 @@ sections:
 
       ## Requirement Status
 
-      - **bcrypt dependency:** ❌ Add `bcrypt` or `bcryptjs`.
-      - **User password handling:** ❌ Implement hashing in the user creation/update path.
-      - **Plain text protection:** ❌ Ensure the database stores password hashes only.
+      - **bcrypt dependency:** âŒ Add `bcrypt` or `bcryptjs`.
+      - **User password handling:** âŒ Implement hashing in the user creation/update path.
+      - **Plain text protection:** âŒ Ensure the database stores password hashes only.
 
       ## Recommendations
 
@@ -625,8 +661,27 @@ sections:
           - products
           - orders
         description: Files reference required API resources
+
+      - id: required_route_patterns
+        type: route_pattern_exists
+        routes:
+          - method: GET
+            path: /products
+          - method: GET
+            path: /products/:id
+          - method: POST
+            path: /products
+          - method: GET
+            path: /users
+          - method: GET
+            path: /users/:id
+          - method: POST
+            path: /users
+          - method: GET
+            path: /orders
+        description: Source code includes route patterns for required API endpoints
     pass_feedback: |
-      > **Passing ✅** — Express CRUD endpoints and route organization are present.
+      > **Passing âœ…** â€” Express CRUD endpoints and route organization are present.
 
       ## General Feedback
 
@@ -634,9 +689,9 @@ sections:
 
       ## Requirement Status
 
-      - **Express API setup:** ✔ The project includes Express.
-      - **Grouped route/handler files:** ✔ Route or handler files are present.
-      - **Required resources:** ✔ The project includes evidence for users, products, and orders endpoints.
+      - **Express API setup:** âœ” The project includes Express.
+      - **Grouped route/handler files:** âœ” Route or handler files are present.
+      - **Required resources:** âœ” The project includes evidence for users, products, and orders endpoints.
 
       ## Recommendations
 
@@ -650,7 +705,7 @@ sections:
       - Express basic routing: https://expressjs.com/en/starter/basic-routing.html
       - MDN HTTP response status codes: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
     fail_feedback: |
-      > **Not Passing ❌** — Required CRUD endpoints or grouped handlers are missing.
+      > **Not Passing âŒ** â€” Required CRUD endpoints or grouped handlers are missing.
 
       ## General Feedback
 
@@ -658,9 +713,9 @@ sections:
 
       ## Requirement Status
 
-      - **Express API setup:** ❌ Add or verify the Express server setup.
-      - **Grouped route/handler files:** ❌ Add handler/route files or make endpoint organization clear.
-      - **Required resources:** ❌ Implement all required user, product, and order endpoints.
+      - **Express API setup:** âŒ Add or verify the Express server setup.
+      - **Grouped route/handler files:** âŒ Add handler/route files or make endpoint organization clear.
+      - **Required resources:** âŒ Implement all required user, product, and order endpoints.
 
       ## Recommendations
 
@@ -701,8 +756,19 @@ sections:
           - typescript
         mode: any
         description: package.json includes TypeScript
+
+      - id: model_method_patterns
+        type: code_contains_all_patterns
+        patterns:
+          - "index("
+          - "show("
+          - "create("
+        file_patterns:
+          - "**/*.ts"
+          - "**/*.js"
+        description: Source code includes common model method patterns
     pass_feedback: |
-      > **Passing ✅** — Model files are present for the required database entities.
+      > **Passing âœ…** â€” Model files are present for the required database entities.
 
       ## General Feedback
 
@@ -710,9 +776,9 @@ sections:
 
       ## Requirement Status
 
-      - **Model files:** ✔ Model/store files are present.
-      - **Required entities:** ✔ Users, products, and orders are represented.
-      - **TypeScript support:** ✔ TypeScript is included for typed model entities.
+      - **Model files:** âœ” Model/store files are present.
+      - **Required entities:** âœ” Users, products, and orders are represented.
+      - **TypeScript support:** âœ” TypeScript is included for typed model entities.
 
       ## Recommendations
 
@@ -726,7 +792,7 @@ sections:
       - node-postgres queries: https://node-postgres.com/features/queries
       - TypeScript modules: https://www.typescriptlang.org/docs/handbook/2/modules.html
     fail_feedback: |
-      > **Not Passing ❌** — Required model files are missing or incomplete.
+      > **Not Passing âŒ** â€” Required model files are missing or incomplete.
 
       ## General Feedback
 
@@ -734,9 +800,9 @@ sections:
 
       ## Requirement Status
 
-      - **Model files:** ❌ Add model/store files for the database entities.
-      - **Required entities:** ❌ Include models for users, products, and orders.
-      - **TypeScript support:** ❌ Use TypeScript types or interfaces for model data shapes.
+      - **Model files:** âŒ Add model/store files for the database entities.
+      - **Required entities:** âŒ Include models for users, products, and orders.
+      - **TypeScript support:** âŒ Use TypeScript types or interfaces for model data shapes.
 
       ## Recommendations
 
@@ -772,7 +838,7 @@ sections:
         pattern: "src/**/*"
         description: Source files exist for TypeScript review
     pass_feedback: |
-      > **Passing ✅** — The project includes TypeScript structure for code quality review.
+      > **Passing âœ…** â€” The project includes TypeScript structure for code quality review.
 
       ## General Feedback
 
@@ -780,9 +846,9 @@ sections:
 
       ## Requirement Status
 
-      - **TypeScript setup:** ✔ TypeScript configuration or dependency evidence is present.
-      - **Typed source files:** ✔ Source files are available for review.
-      - **Code quality review path:** ✔ The project has enough structure to inspect async handling and typing practices.
+      - **TypeScript setup:** âœ” TypeScript configuration or dependency evidence is present.
+      - **Typed source files:** âœ” Source files are available for review.
+      - **Code quality review path:** âœ” The project has enough structure to inspect async handling and typing practices.
 
       ## Recommendations
 
@@ -796,7 +862,7 @@ sections:
       - TypeScript `noImplicitAny`: https://www.typescriptlang.org/tsconfig/noImplicitAny.html
       - MDN async functions: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
     fail_feedback: |
-      > **Not Passing ❌** — TypeScript/code quality evidence is missing or too limited.
+      > **Not Passing âŒ** â€” TypeScript/code quality evidence is missing or too limited.
 
       ## General Feedback
 
@@ -804,9 +870,9 @@ sections:
 
       ## Requirement Status
 
-      - **TypeScript setup:** ❌ Add or verify `typescript` and `tsconfig.json`.
-      - **Typed source files:** ❌ Include the application source files needed for review.
-      - **Code quality review path:** ❌ Make sure the implementation uses types, error handling, and consistent style.
+      - **TypeScript setup:** âŒ Add or verify `typescript` and `tsconfig.json`.
+      - **Typed source files:** âŒ Include the application source files needed for review.
+      - **Code quality review path:** âŒ Make sure the implementation uses types, error handling, and consistent style.
 
       ## Recommendations
 
@@ -838,10 +904,10 @@ sections:
         description: .gitignore exists
 
       - id: env_ignored
-        type: text_contains_any
-        path: .gitignore
-        keywords:
+        type: gitignore_contains
+        patterns:
           - .env
+        mode: any
         description: .env is listed in .gitignore
 
       - id: env_documented
@@ -855,7 +921,7 @@ sections:
           - BCRYPT
         description: README documents required environment variables for reviewer visibility
     pass_feedback: |
-      > **Passing ✅** — Environment variables are correctly managed with dotenv and protected via .gitignore.
+      > **Passing âœ…** â€” Environment variables are correctly managed with dotenv and protected via .gitignore.
 
       ## General Feedback
 
@@ -863,9 +929,9 @@ sections:
 
       ## Requirement Status
 
-      - **Use of dotenv:** ✔ Environment variables are loaded using `dotenv`.
-      - **.env in .gitignore:** ✔ The `.env` file is listed in `.gitignore`, so it should not be committed to the repository.
-      - **Reviewer visibility:** ✔ Environment variable values or examples are documented in `README.md`, allowing the reviewer to see the required configuration without needing the actual `.env` file.
+      - **Use of dotenv:** âœ” Environment variables are loaded using `dotenv`.
+      - **.env in .gitignore:** âœ” The `.env` file is listed in `.gitignore`, so it should not be committed to the repository.
+      - **Reviewer visibility:** âœ” Environment variable values or examples are documented in `README.md`, allowing the reviewer to see the required configuration without needing the actual `.env` file.
 
       ## Recommendations
 
@@ -878,7 +944,7 @@ sections:
       - Twelve-Factor App config: https://12factor.net/config
       - GitHub documentation for ignoring files: https://docs.github.com/en/get-started/git-basics/ignoring-files
     fail_feedback: |
-      > **Not Passing ❌** — Environment variables are not yet securely documented and protected.
+      > **Not Passing âŒ** â€” Environment variables are not yet securely documented and protected.
 
       ## General Feedback
 
@@ -886,9 +952,9 @@ sections:
 
       ## Requirement Status
 
-      - **Use of dotenv:** ❌ Add and configure `dotenv`.
-      - **.env in .gitignore:** ❌ Add `.env` to `.gitignore`.
-      - **Reviewer visibility:** ❌ Document the required environment variable names and safe sample values in `README.md`.
+      - **Use of dotenv:** âŒ Add and configure `dotenv`.
+      - **.env in .gitignore:** âŒ Add `.env` to `.gitignore`.
+      - **Reviewer visibility:** âŒ Document the required environment variable names and safe sample values in `README.md`.
 
       ## Recommendations
 
@@ -926,7 +992,7 @@ sections:
         mode: any
         description: package.json includes SuperTest for endpoint testing
     pass_feedback: |
-      > **Passing ✅** — Endpoint tests are present and configured.
+      > **Passing âœ…** â€” Endpoint tests are present and configured.
 
       ## General Feedback
 
@@ -934,9 +1000,9 @@ sections:
 
       ## Requirement Status
 
-      - **Project endpoint tests must run:** ✔ A test script is available.
-      - **Every endpoint must have one test:** ✔ Spec files are present for endpoint coverage review.
-      - **All tests must pass:** ✔ The project is structured so reviewers can run the suite and verify passing status.
+      - **Project endpoint tests must run:** âœ” A test script is available.
+      - **Every endpoint must have one test:** âœ” Spec files are present for endpoint coverage review.
+      - **All tests must pass:** âœ” The project is structured so reviewers can run the suite and verify passing status.
 
       ## Recommendations
 
@@ -950,7 +1016,7 @@ sections:
       - Jasmine documentation: https://jasmine.github.io/pages/docs_home.html
       - Express routing guide: https://expressjs.com/en/guide/routing.html
     fail_feedback: |
-      > **Not Passing ❌** — Endpoint tests do not yet meet the project requirements.
+      > **Not Passing âŒ** â€” Endpoint tests do not yet meet the project requirements.
 
       ## General Feedback
 
@@ -958,9 +1024,9 @@ sections:
 
       ## Requirement Status
 
-      - **Project endpoint tests must run:** ❌ Add or fix the `test` script in `package.json`.
-      - **Every endpoint must have one test:** ❌ Add tests for each required product, user, and order endpoint.
-      - **All tests must pass:** ❌ Re-run the full test suite after adding missing coverage.
+      - **Project endpoint tests must run:** âŒ Add or fix the `test` script in `package.json`.
+      - **Every endpoint must have one test:** âŒ Add tests for each required product, user, and order endpoint.
+      - **All tests must pass:** âŒ Re-run the full test suite after adding missing coverage.
 
       ## Recommendations
 
@@ -1002,8 +1068,18 @@ sections:
           - JWT
           - token
         description: README documents JWT-related configuration
+
+      - id: jwt_sign_and_verify_used
+        type: code_contains_all_patterns
+        patterns:
+          - jwt.sign
+          - jwt.verify
+        file_patterns:
+          - "**/*.ts"
+          - "**/*.js"
+        description: Source code uses JWT sign and verify calls
     pass_feedback: |
-      > **Passing ✅** — JWT authentication support is present in the API.
+      > **Passing âœ…** â€” JWT authentication support is present in the API.
 
       ## General Feedback
 
@@ -1011,9 +1087,9 @@ sections:
 
       ## Requirement Status
 
-      - **JWT generation:** ✔ `jsonwebtoken` support is present.
-      - **JWT validation:** ✔ Auth/token-related files are available for route protection review.
-      - **JWT configuration:** ✔ JWT-related configuration is documented for reviewer setup.
+      - **JWT generation:** âœ” `jsonwebtoken` support is present.
+      - **JWT validation:** âœ” Auth/token-related files are available for route protection review.
+      - **JWT configuration:** âœ” JWT-related configuration is documented for reviewer setup.
 
       ## Recommendations
 
@@ -1027,7 +1103,7 @@ sections:
       - JWT introduction: https://jwt.io/introduction
       - Express middleware guide: https://expressjs.com/en/guide/using-middleware.html
     fail_feedback: |
-      > **Not Passing ❌** — JWT authentication is missing or incomplete.
+      > **Not Passing âŒ** â€” JWT authentication is missing or incomplete.
 
       ## General Feedback
 
@@ -1035,9 +1111,9 @@ sections:
 
       ## Requirement Status
 
-      - **JWT generation:** ❌ Add `jsonwebtoken` and generate tokens for user-related auth flows.
-      - **JWT validation:** ❌ Add middleware or route checks that reject invalid/missing tokens.
-      - **JWT configuration:** ❌ Document the JWT secret/configuration in the README using safe sample values.
+      - **JWT generation:** âŒ Add `jsonwebtoken` and generate tokens for user-related auth flows.
+      - **JWT validation:** âŒ Add middleware or route checks that reject invalid/missing tokens.
+      - **JWT configuration:** âŒ Document the JWT secret/configuration in the README using safe sample values.
 
       ## Recommendations
 
@@ -1076,7 +1152,7 @@ sections:
           - orders
         description: Tests or source files reference required database models
     pass_feedback: |
-      > **Passing ✅** — Database action tests are present for review.
+      > **Passing âœ…** â€” Database action tests are present for review.
 
       ## General Feedback
 
@@ -1084,9 +1160,9 @@ sections:
 
       ## Requirement Status
 
-      - **Database action tests exist:** ✔ Spec files are present.
-      - **Tests can be run:** ✔ A `test` script is available.
-      - **Required models are represented:** ✔ Project files reference users, products, and orders.
+      - **Database action tests exist:** âœ” Spec files are present.
+      - **Tests can be run:** âœ” A `test` script is available.
+      - **Required models are represented:** âœ” Project files reference users, products, and orders.
 
       ## Recommendations
 
@@ -1100,7 +1176,7 @@ sections:
       - node-postgres queries: https://node-postgres.com/features/queries
       - npm scripts documentation: https://docs.npmjs.com/cli/using-npm/scripts
     fail_feedback: |
-      > **Not Passing ❌** — Database action unit tests are missing or incomplete.
+      > **Not Passing âŒ** â€” Database action unit tests are missing or incomplete.
 
       ## General Feedback
 
@@ -1108,9 +1184,9 @@ sections:
 
       ## Requirement Status
 
-      - **Database action tests exist:** ❌ Add tests for each required model/database method.
-      - **Tests can be run:** ❌ Add or fix the `test` script in `package.json`.
-      - **Required models are represented:** ❌ Make sure users, products, and orders model actions are tested.
+      - **Database action tests exist:** âŒ Add tests for each required model/database method.
+      - **Tests can be run:** âŒ Add or fix the `test` script in `package.json`.
+      - **Required models are represented:** âŒ Make sure users, products, and orders model actions are tested.
 
       ## Recommendations
 
@@ -1133,6 +1209,15 @@ sections:
         type: file_exists
         path: package.json
         description: package.json exists
+
+      - id: package_json_core_keys
+        type: json_file_contains_keys
+        path: package.json
+        keys:
+          - scripts
+          - dependencies
+        mode: all
+        description: package.json includes scripts and dependencies keys
 
       - id: readme_exists
         type: file_exists
@@ -1161,7 +1246,7 @@ sections:
 
       ## Requirement Status
 
-      - **Project configuration:** ✔ `package.json` is present.
+      - **Project configuration:** ✔ `package.json` is present and includes core configuration keys.
       - **Reviewer documentation:** ✔ README and requirements documentation are present.
       - **Implementation evidence:** ✔ Source, migration, model, or handler files are present.
 
@@ -1170,6 +1255,30 @@ sections:
       - Before submitting, run install, migrations, tests, and server startup from a clean checkout.
       - Keep the README aligned with the actual commands in `package.json`.
       - Make sure the submitted ZIP includes all source files needed to review the project.
+
+      ## Reference Resources
+
+      - npm package.json documentation: https://docs.npmjs.com/cli/configuring-npm/package-json
+      - npm scripts documentation: https://docs.npmjs.com/cli/using-npm/scripts
+      - Express getting started: https://expressjs.com/en/starter/installing.html
+    fail_feedback: |
+      > **Not Passing ❌** — The submission is missing core materials needed for review.
+
+      ## General Feedback
+
+      A complete Storefront Backend submission should include project configuration, setup documentation, requirements documentation, source code, migrations, models, handlers, and tests. Missing core files can prevent reviewers from validating the project accurately.
+
+      ## Requirement Status
+
+      - **Project configuration:** ❌ Include a complete `package.json`.
+      - **Reviewer documentation:** ❌ Include both `README.md` and `REQUIREMENTS.md`.
+      - **Implementation evidence:** ❌ Include source code, migrations, models, handlers, and tests.
+
+      ## Recommendations
+
+      - Confirm the ZIP contains the full backend project, not only a subset of files.
+      - Add missing documentation and source folders before resubmitting.
+      - Run the project from a fresh extraction to catch missing files.
 
       ## Reference Resources
 
@@ -1249,27 +1358,4 @@ sections:
       - npm install documentation: https://docs.npmjs.com/cli/commands/npm-install
       - npm scripts documentation: https://docs.npmjs.com/cli/using-npm/scripts
       - Jasmine documentation: https://jasmine.github.io/pages/docs_home.html
-    fail_feedback: |
-      > **Not Passing ❌** — The submission is missing core materials needed for review.
 
-      ## General Feedback
-
-      A complete Storefront Backend submission should include project configuration, setup documentation, requirements documentation, source code, migrations, models, handlers, and tests. Missing core files can prevent reviewers from validating the project accurately.
-
-      ## Requirement Status
-
-      - **Project configuration:** ❌ Include a complete `package.json`.
-      - **Reviewer documentation:** ❌ Include both `README.md` and `REQUIREMENTS.md`.
-      - **Implementation evidence:** ❌ Include source code, migrations, models, handlers, and tests.
-
-      ## Recommendations
-
-      - Confirm the ZIP contains the full backend project, not only a subset of files.
-      - Add missing documentation and source folders before resubmitting.
-      - Run the project from a fresh extraction to catch missing files.
-
-      ## Reference Resources
-
-      - npm package.json documentation: https://docs.npmjs.com/cli/configuring-npm/package-json
-      - npm scripts documentation: https://docs.npmjs.com/cli/using-npm/scripts
-      - Express getting started: https://expressjs.com/en/starter/installing.html

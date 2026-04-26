@@ -59,6 +59,11 @@ def _format_evidence(evidence: Any) -> list[str]:
                 formatted = ", ".join(f"`{match}`" for match in matches[:5]) or "none"
                 lines.append(f"  - `{keyword}` files: {formatted}")
 
+        if "matches_by_pattern" in evidence:
+            for pattern, matches in evidence.get("matches_by_pattern", {}).items():
+                formatted = ", ".join(f"`{match}`" for match in matches[:5]) or "none"
+                lines.append(f"  - `{pattern}` matches: {formatted}")
+
         if "command" in evidence:
             command = evidence.get("command") or []
             formatted = " ".join(str(part) for part in command)

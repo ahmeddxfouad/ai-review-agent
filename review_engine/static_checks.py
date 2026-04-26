@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -41,6 +42,79 @@ def _text_snippets(path: Path, root: Path, keywords: list[str], max_snippets: in
             break
 
     return snippets
+
+
+def _code_files(root: Path, patterns: list[str] | None = None) -> list[Path]:
+    patterns = patterns or [
+        "**/*.py",
+        "**/*.js",
+        "**/*.jsx",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.sql",
+        "**/*.html",
+        "**/*.css",
+    ]
+    ignored_parts = {"node_modules", ".git", ".venv", "venv", "__pycache__"}
+    files: list[Path] = []
+
+    for pattern in patterns:
+        for path in root.glob(pattern):
+            if not path.is_file():
+                continue
+            if any(part in ignored_parts for part in path.parts):
+                continue
+            files.append(path)
+
+    return sorted(set(files))
+
+
+def _pattern_snippets(
+    path: Path,
+    root: Path,
+    patterns: list[str],
+    *,
+    regex: bool = False,
+    max_snippets: int = 5,
+) -> list[dict[str, Any]]:
+    snippets = []
+    lines = read_text_safely(path).splitlines()
+
+    for line_number, line in enumerate(lines, start=1):
+        matched_patterns = []
+        for pattern in patterns:
+            if regex:
+                if re.search(pattern, line, flags=re.IGNORECASE):
+                    matched_patterns.append(pattern)
+            elif pattern.lower() in line.lower():
+                matched_patterns.append(pattern)
+
+        if not matched_patterns:
+            continue
+
+        snippets.append(
+            {
+                "file": _relative(path, root),
+                "line": line_number,
+                "matched_patterns": matched_patterns,
+                "quote": line.strip()[:200],
+            }
+        )
+
+        if len(snippets) >= max_snippets:
+            break
+
+    return snippets
+
+
+def _json_key_exists(data: Any, key_path: str) -> bool:
+    current = data
+    for part in key_path.split("."):
+        if isinstance(current, dict) and part in current:
+            current = current[part]
+            continue
+        return False
+    return True
 
 
 def check_file_exists(root: Path, check: dict[str, Any]) -> dict[str, Any]:
@@ -284,6 +358,240 @@ def check_file_list_contains_all(root: Path, check: dict[str, Any]) -> dict[str,
     }
 
 
+def check_code_contains_pattern(root: Path, check: dict[str, Any]) -> dict[str, Any]:
+    patterns = [str(pattern) for pattern in check.get("patterns", [])]
+    mode = check.get("mode", "any")
+    use_regex = bool(check.get("regex", False))
+    file_patterns = check.get("file_patterns")
+    files = _code_files(root, file_patterns)
+
+    matches_by_pattern: dict[str, list[str]] = {pattern: [] for pattern in patterns}
+    snippets = []
+
+    for path in files:
+        text = read_text_safely(path)
+        for pattern in patterns:
+            matched = (
+                re.search(pattern, text, flags=re.IGNORECASE | re.MULTILINE) is not None
+                if use_regex
+                else pattern.lower() in text.lower()
+            )
+            if matched:
+                matches_by_pattern[pattern].append(_relative(path, root))
+
+        snippets.extend(
+            _pattern_snippets(
+                path,
+                root,
+                patterns,
+                regex=use_regex,
+                max_snippets=max(0, 5 - len(snippets)),
+            )
+        )
+        if len(snippets) >= 5:
+            snippets = snippets[:5]
+
+    matched = [
+        pattern for pattern, locations in matches_by_pattern.items()
+        if locations
+    ]
+    missing = [
+        pattern for pattern, locations in matches_by_pattern.items()
+        if not locations
+    ]
+    passed = len(matched) > 0 if mode == "any" else len(missing) == 0
+
+    return {
+        "passed": passed,
+        "message": (
+            f"Matched code patterns: {matched}"
+            if matched
+            else f"No expected code patterns found: {patterns}"
+        ),
+        "evidence": {
+            "matched": matched,
+            "missing": missing,
+            "matches_by_pattern": {
+                pattern: locations[:10]
+                for pattern, locations in matches_by_pattern.items()
+            },
+            "snippets": snippets,
+        },
+    }
+
+
+def check_code_contains_all_patterns(root: Path, check: dict[str, Any]) -> dict[str, Any]:
+    check = {**check, "mode": "all"}
+    return check_code_contains_pattern(root, check)
+
+
+def check_json_file_contains_keys(root: Path, check: dict[str, Any]) -> dict[str, Any]:
+    path = check["path"]
+    keys = [str(key) for key in check.get("keys", [])]
+    mode = check.get("mode", "all")
+    found_path = find_file_case_insensitive(root, path)
+
+    if found_path is None or not found_path.is_file():
+        return {
+            "passed": False,
+            "message": f"JSON file not found: {path}",
+            "evidence": None,
+        }
+
+    try:
+        data = json.loads(found_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        return {
+            "passed": False,
+            "message": f"Could not parse JSON file {path}: {exc}",
+            "evidence": {"file": _relative(found_path, root)},
+        }
+
+    matched = [key for key in keys if _json_key_exists(data, key)]
+    missing = [key for key in keys if key not in matched]
+    passed = len(matched) > 0 if mode == "any" else len(missing) == 0
+
+    return {
+        "passed": passed,
+        "message": (
+            f"Matched JSON keys in {path}: {matched}"
+            if matched
+            else f"No expected JSON keys found in {path}: {keys}"
+        ),
+        "evidence": {
+            "file": _relative(found_path, root),
+            "matched": matched,
+            "missing": missing,
+        },
+    }
+
+
+def check_dependency_file_contains(root: Path, check: dict[str, Any]) -> dict[str, Any]:
+    path = check["path"]
+    dependencies = [str(dependency) for dependency in check.get("dependencies", [])]
+    mode = check.get("mode", "all")
+    found_path = find_file_case_insensitive(root, path)
+
+    if found_path is None or not found_path.is_file():
+        return {
+            "passed": False,
+            "message": f"Dependency file not found: {path}",
+            "evidence": None,
+        }
+
+    if found_path.name.lower() == "package.json":
+        package_check = {
+            "dependencies": dependencies,
+            "mode": mode,
+        }
+        return check_package_json_has_dependency(root, package_check)
+
+    text = normalize_text(read_text_safely(found_path))
+    matched = [
+        dependency for dependency in dependencies
+        if re.search(rf"(^|\n)\s*{re.escape(dependency.lower())}\b", text)
+    ]
+    missing = [dependency for dependency in dependencies if dependency not in matched]
+    passed = len(matched) > 0 if mode == "any" else len(missing) == 0
+
+    return {
+        "passed": passed,
+        "message": (
+            f"Matched dependencies in {path}: {matched}"
+            if matched
+            else f"No expected dependencies found in {path}: {dependencies}"
+        ),
+        "evidence": {
+            "file": _relative(found_path, root),
+            "matched": matched,
+            "missing": missing,
+            "snippets": _text_snippets(found_path, root, matched),
+        },
+    }
+
+
+def check_gitignore_contains(root: Path, check: dict[str, Any]) -> dict[str, Any]:
+    gitignore_check = {
+        "path": ".gitignore",
+        "keywords": check.get("patterns", check.get("keywords", [])),
+    }
+    mode = check.get("mode", "all")
+    if mode == "any":
+        return check_text_contains_any(root, gitignore_check)
+    return check_text_contains_all(root, gitignore_check)
+
+
+def check_route_pattern_exists(root: Path, check: dict[str, Any]) -> dict[str, Any]:
+    routes = check.get("routes", [])
+    file_patterns = check.get("file_patterns") or [
+        "**/*.py",
+        "**/*.js",
+        "**/*.jsx",
+        "**/*.ts",
+        "**/*.tsx",
+    ]
+    files = _code_files(root, file_patterns)
+    matches: dict[str, list[str]] = {}
+    missing = []
+    snippets = []
+
+    for route in routes:
+        method = str(route.get("method", "")).lower()
+        path = str(route.get("path", ""))
+        route_id = f"{method.upper()} {path}"
+        route_matches = []
+
+        for file_path in files:
+            text = read_text_safely(file_path)
+            lowered = text.lower()
+            path_patterns = {
+                path.lower(),
+                path.replace(":id", "<int:id>").lower(),
+                path.replace(":id", "<id>").lower(),
+            }
+            method_patterns = {
+                f".{method}(",
+                f"@app.route",
+                f"methods=['{method.upper()}']",
+                f'methods=["{method.upper()}"]',
+                f"methods=[\"{method.upper()}\"]",
+            }
+
+            if any(path_pattern in lowered for path_pattern in path_patterns) and any(
+                method_pattern.lower() in lowered for method_pattern in method_patterns
+            ):
+                route_matches.append(_relative(file_path, root))
+                snippets.extend(
+                    _pattern_snippets(
+                        file_path,
+                        root,
+                        [path, f".{method}(", "@app.route", method.upper()],
+                        max_snippets=max(0, 5 - len(snippets)),
+                    )
+                )
+
+        if route_matches:
+            matches[route_id] = sorted(set(route_matches))[:10]
+        else:
+            missing.append(route_id)
+
+    passed = not missing
+    return {
+        "passed": passed,
+        "message": (
+            "Found all expected route patterns."
+            if passed
+            else f"Missing expected route patterns: {missing}"
+        ),
+        "evidence": {
+            "matched": list(matches.keys()),
+            "missing": missing,
+            "matches_by_pattern": matches,
+            "snippets": snippets[:5],
+        },
+    }
+
+
 def check_run_command(root: Path, check: dict[str, Any], context: dict[str, Any]) -> dict[str, Any]:
     command = check.get("command", [])
     if isinstance(command, str):
@@ -395,6 +703,12 @@ CHECKS = {
     "package_json_has_script": check_package_json_has_script,
     "file_list_contains_any": check_file_list_contains_any,
     "file_list_contains_all": check_file_list_contains_all,
+    "code_contains_pattern": check_code_contains_pattern,
+    "code_contains_all_patterns": check_code_contains_all_patterns,
+    "json_file_contains_keys": check_json_file_contains_keys,
+    "dependency_file_contains": check_dependency_file_contains,
+    "gitignore_contains": check_gitignore_contains,
+    "route_pattern_exists": check_route_pattern_exists,
     "run_command": check_run_command,
 }
 
