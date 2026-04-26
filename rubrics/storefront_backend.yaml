@@ -1176,6 +1176,79 @@ sections:
       - npm package.json documentation: https://docs.npmjs.com/cli/configuring-npm/package-json
       - npm scripts documentation: https://docs.npmjs.com/cli/using-npm/scripts
       - Express getting started: https://expressjs.com/en/starter/installing.html
+
+  - id: runtime_local_verification
+    title: Local Runtime Verification
+    requirement: Install dependencies and run the submitted project's test suite in local runtime review mode.
+    modes:
+      - runtime_local
+      - full_review
+    pass_rule: all
+    checks:
+      - id: npm_install
+        type: run_command
+        command:
+          - npm
+          - install
+        timeout_seconds: 300
+        expected_exit_code: 0
+        description: npm install completes successfully
+
+      - id: npm_test
+        type: run_command
+        command:
+          - npm
+          - test
+        timeout_seconds: 180
+        expected_exit_code: 0
+        description: npm test completes successfully
+    pass_feedback: |
+      > **Passing ✅** — The project installs dependencies and its test command passes in local runtime review mode.
+
+      ## General Feedback
+
+      The project was executed in local runtime review mode. Dependency installation completed successfully, and the configured test command exited with the expected status code.
+
+      ## Requirement Status
+
+      - **Dependency installation:** ✔ `npm install` completed successfully.
+      - **Test command:** ✔ `npm test` completed successfully.
+      - **Runtime evidence:** ✔ The review output includes command exit codes and captured output excerpts.
+
+      ## Recommendations
+
+      - Keep test output focused and readable so reviewers can quickly identify failures if they occur later.
+      - Make sure the README commands match the scripts that actually run successfully.
+
+      ## Reference Resources
+
+      - npm install documentation: https://docs.npmjs.com/cli/commands/npm-install
+      - npm scripts documentation: https://docs.npmjs.com/cli/using-npm/scripts
+      - Jasmine documentation: https://jasmine.github.io/pages/docs_home.html
+    fail_feedback: |
+      > **Not Passing ❌** — The project did not complete local runtime verification.
+
+      ## General Feedback
+
+      The project was executed in local runtime review mode, but dependency installation or the configured test command did not exit successfully. Check the captured command output in the evidence section to identify the exact failure.
+
+      ## Requirement Status
+
+      - **Dependency installation:** ❌ `npm install` must complete successfully from a fresh extraction.
+      - **Test command:** ❌ `npm test` must complete successfully using the submitted project configuration.
+      - **Runtime evidence:** ✔ The review output includes command exit codes and captured output excerpts.
+
+      ## Recommendations
+
+      - Run `npm install` from a clean checkout and fix any dependency or package-lock issues.
+      - Run `npm test` locally and resolve failing tests, missing scripts, or environment setup problems.
+      - Document any required environment variables or database setup before the test command.
+
+      ## Reference Resources
+
+      - npm install documentation: https://docs.npmjs.com/cli/commands/npm-install
+      - npm scripts documentation: https://docs.npmjs.com/cli/using-npm/scripts
+      - Jasmine documentation: https://jasmine.github.io/pages/docs_home.html
     fail_feedback: |
       > **Not Passing ❌** — The submission is missing core materials needed for review.
 

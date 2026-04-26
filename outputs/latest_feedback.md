@@ -7,9 +7,12 @@ Detection confidence: **1.00**
 
 Rubric project: **Storefront Backend**
 
-Sections passed: **1 / 16**
-Review method: **static_inspection**
-Runtime status: **not_run**
+Review mode: **full_review**
+Sections passed: **1 / 17**
+Sections skipped: **0**
+Review method: **mixed_static_and_runtime**
+Runtime status: **mixed**
+LLM status: **not_implemented**
 
 ### Project Detection Evidence
 
@@ -17,9 +20,9 @@ Runtime status: **not_run**
 
 ## Important Note
 
-This review was generated from static evidence only. Runtime commands such as installation, tests, build, database migrations, or server startup were not run in this MVP unless explicitly added later.
+This review is evidence-based. Runtime commands are only executed in `runtime_local` or `full_review` mode; otherwise, the agent inspects files without running downloaded code.
 
-Treat each pass/fail result as an evidence-based draft: it means the expected files, text, dependencies, or patterns were observed. It does not prove the project works at runtime.
+Treat each pass/fail result as a review draft. Static checks mean expected files, text, dependencies, or patterns were observed. Runtime checks mean the listed command actually ran and produced the captured exit code/output.
 
 ---
 
@@ -871,6 +874,31 @@ Every required database action needs a passing test. Model tests are important b
   - Review method: Static inspection; runtime not run
   - Matches: `migrations\001-create-users.sql`
   - Total matches: 1
+
+### Feedback
+
+This section needs revision based on the missing checks above.
+
+---
+
+## ❌ Local Runtime Verification
+
+**Requirement:** Install dependencies and run the submitted project's test suite in local runtime review mode.
+
+**Status:** Does Not Pass
+
+**Review method:** mixed_static_and_runtime
+
+**Runtime status:** failed_to_start
+
+### Evidence Checked
+
+- ❌ **npm install completes successfully** — Runtime command could not start: [WinError 2] The system cannot find the file specified
+  - Review method: runtime_execution; runtime: failed_to_start
+  - Command: `npm install`
+- ❌ **npm test completes successfully** — Runtime command could not start: [WinError 2] The system cannot find the file specified
+  - Review method: runtime_execution; runtime: failed_to_start
+  - Command: `npm test`
 
 ### Feedback
 

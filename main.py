@@ -26,10 +26,20 @@ def parse_args() -> argparse.Namespace:
         help="Automatically detect project type and select rubric.",
     )
     parser.add_argument(
+        "--mode",
+        choices=["static_only", "runtime_local", "llm_assisted", "full_review"],
+        default="static_only",
+        help=(
+            "Review mode. static_only inspects files only; runtime_local also "
+            "runs rubric commands; llm_assisted/full_review reserve space for "
+            "a future LLM judgment layer."
+        ),
+    )
+    parser.add_argument(
         "--enable-runtime-checks",
         action="store_true",
         help=(
-            "Run rubric checks of type run_command. "
+            "Legacy alias for --mode runtime_local. "
             "Only use this for submissions you are comfortable executing."
         ),
     )
@@ -47,6 +57,7 @@ def copy_latest_outputs(feedback_md: Path, feedback_txt: Path) -> None:
 def main() -> None:
     args = parse_args()
     zip_path = Path(args.zip)
+    review_mode = "runtime_local" if args.enable_runtime_checks else args.mode
 
     if not zip_path.exists():
         raise FileNotFoundError(f"Zip file not found: {zip_path}")
@@ -71,12 +82,13 @@ def main() -> None:
     evaluation = evaluate_rubric(
         extracted_dir,
         rubric,
-        enable_runtime_checks=args.enable_runtime_checks,
+        review_mode=review_mode,
     )
 
     evidence_output = {
         "review_dir": str(review_dir),
         "submission_zip": str(zip_path),
+        "review_mode": review_mode,
         "detected": detected,
         "evaluation": evaluation,
     }
@@ -99,4 +111,15 @@ def main() -> None:
     copy_latest_outputs(feedback_md, feedback_txt)
 
     print("\nReview complete.")
-    print(f"Review
+    print(f"Review folder: {review_dir}")
+    print(f"Evidence: {evidence_path}")
+    print(f"Feedback Markdown: {feedback_md}")
+    print(f"Feedback TXT: {feedback_txt}")
+    print("\nDetected project:")
+    print(f"- {detected['detected_project']}")
+    print(f"- Confidence: {detected['confidence']:.2f}")
+    print(f"- Review mode: {review_mode}")
+
+
+if __name__ == "__main__":
+    main()

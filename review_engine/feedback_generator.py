@@ -5,7 +5,11 @@ from typing import Any
 
 
 def _status_emoji(status: str) -> str:
-    return "✅" if status == "Passes" else "❌"
+    if status == "Passes":
+        return "✅"
+    if status == "Skipped":
+        return "⏭"
+    return "❌"
 
 
 def _method_label(check: dict[str, Any]) -> str:
@@ -55,6 +59,33 @@ def _format_evidence(evidence: Any) -> list[str]:
                 formatted = ", ".join(f"`{match}`" for match in matches[:5]) or "none"
                 lines.append(f"  - `{keyword}` files: {formatted}")
 
+        if "command" in evidence:
+            command = evidence.get("command") or []
+            formatted = " ".join(str(part) for part in command)
+            lines.append(f"  - Command: `{formatted}`")
+
+        if "cwd" in evidence:
+            lines.append(f"  - Command cwd: `{evidence['cwd']}`")
+
+        if "exit_code" in evidence:
+            lines.append(
+                "  - Exit code: "
+                f"`{evidence['exit_code']}` "
+                f"(expected `{evidence.get('expected_exit_code')}`)"
+            )
+
+        if evidence.get("stdout"):
+            lines.append("  - Stdout excerpt:")
+            lines.append("    ```txt")
+            lines.extend(f"    {line}" for line in evidence["stdout"].splitlines()[-20:])
+            lines.append("    ```")
+
+        if evidence.get("stderr"):
+            lines.append("  - Stderr excerpt:")
+            lines.append("    ```txt")
+            lines.extend(f"    {line}" for line in evidence["stderr"].splitlines()[-20:])
+            lines.append("    ```")
+
         snippets = evidence.get("snippets") or []
         for snippet in snippets[:3]:
             lines.append(
@@ -99,19 +130,17 @@ def generate_feedback_markdown(
         "",
         f"Rubric project: **{project_name}**",
         "",
+        f"Review mode: **{summary.get('review_mode', 'static_only')}**",
         f"Sections passed: **{summary['passed_sections']} / {summary['total_sections']}**",
+        f"Sections skipped: **{summary.get('skipped_sections', 0)}**",
         f"Review method: **{summary.get('review_method', 'static_inspection')}**",
         f"Runtime status: **{summary.get('runtime_status', 'not_run')}**",
+        f"LLM status: **{summary.get('llm_status', 'not_requested')}**",
         "",
     ]
 
     if detected.get("evidence"):
-        lines.extend(
-            [
-                "### Project Detection Evidence",
-                "",
-            ]
-        )
+        lines.extend(["### Project Detection Evidence", ""])
         for item in detected["evidence"]:
             lines.append(f"- {item}")
         lines.append("")
@@ -120,9 +149,9 @@ def generate_feedback_markdown(
         [
             "## Important Note",
             "",
-            "This review was generated from static evidence only. Runtime commands such as installation, tests, build, database migrations, or server startup were not run in this MVP unless explicitly added later.",
+            "This review is evidence-based. Runtime commands are only executed in `runtime_local` or `full_review` mode; otherwise, the agent inspects files without running downloaded code.",
             "",
-            "Treat each pass/fail result as an evidence-based draft: it means the expected files, text, dependencies, or patterns were observed. It does not prove the project works at runtime.",
+            "Treat each pass/fail result as a review draft. Static checks mean expected files, text, dependencies, or patterns were observed. Runtime checks mean the listed command actually ran and produced the captured exit code/output.",
             "",
         ]
     )
@@ -148,21 +177,22 @@ def generate_feedback_markdown(
             ]
         )
 
-        for check in section["checks"]:
-            lines.append(_format_check_result(check))
+        if section.get("skip_reason"):
+            lines.append(f"- ⏭ **Skipped** — {section['skip_reason']}")
+        else:
+            for check in section["checks"]:
+                lines.append(_format_check_result(check))
 
         lines.append("")
 
-        feedback = section["pass_feedback"] if status == "Passes" else section["fail_feedback"]
+        feedback = ""
+        if status == "Passes":
+            feedback = section["pass_feedback"]
+        elif status == "Does Not Pass":
+            feedback = section["fail_feedback"]
+
         if feedback:
-            lines.extend(
-                [
-                    "### Feedback",
-                    "",
-                    feedback.strip(),
-                    "",
-                ]
-            )
+            lines.extend(["### Feedback", "", feedback.strip(), ""])
         else:
             lines.extend(
                 [
@@ -171,7 +201,11 @@ def generate_feedback_markdown(
                     (
                         "This section appears to meet the required checks."
                         if status == "Passes"
-                        else "This section needs revision based on the missing checks above."
+                        else (
+                            "This section was skipped for the selected review mode."
+                            if status == "Skipped"
+                            else "This section needs revision based on the missing checks above."
+                        )
                     ),
                     "",
                 ]
