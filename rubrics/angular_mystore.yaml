@@ -1,0 +1,57 @@
+project_name: Angular MyStore
+
+sections:
+  - id: angular_scaffold
+    title: Angular Application Setup
+    requirement: Scaffold and configure a single-page application with Angular.
+    pass_rule: all
+    checks:
+      - id: angular_json
+        type: file_exists
+        path: angular.json
+        description: angular.json exists
+
+      - id: angular_dependency
+        type: package_json_has_dependency
+        dependencies:
+          - "@angular/core"
+        mode: any
+        description: package.json includes Angular dependency
+
+      - id: app_folder
+        type: glob_exists
+        pattern: "src/app/**/*"
+        description: src/app folder contains application files
+    fail_feedback: >
+      The project does not show enough evidence of a complete Angular application
+      scaffold. Please make sure angular.json, package.json Angular dependencies,
+      and src/app files are included.
+
+  - id: readme
+    title: README Documentation
+    requirement: README includes project description, installation, and launch instructions.
+    pass_rule: all
+    checks:
+      - id: readme_exists
+        type: file_exists
+        path: README.md
+        description: README.md exists
+
+      - id: install_instructions
+        type: text_contains_any
+        path: README.md
+        keywords:
+          - npm install
+          - yarn install
+        description: README includes installation instructions
+
+      - id: launch_instructions
+        type: text_contains_any
+        path: README.md
+        keywords:
+          - ng serve
+          - npm start
+        description: README includes launch instructions
+    fail_feedback: >
+      Please update the README with a clear project description, installation
+      instructions, and launch instructions such as npm install and ng serve.

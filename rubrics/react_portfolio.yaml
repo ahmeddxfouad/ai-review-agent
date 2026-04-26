@@ -1,0 +1,48 @@
+project_name: React Portfolio
+
+sections:
+  - id: react_setup
+    title: React Project Setup
+    requirement: Project should include a working React application structure.
+    pass_rule: all
+    checks:
+      - id: package_json
+        type: file_exists
+        path: package.json
+        description: package.json exists
+
+      - id: react_dependency
+        type: package_json_has_dependency
+        dependencies:
+          - react
+          - react-dom
+        mode: any
+        description: package.json includes React dependencies
+
+      - id: src_files
+        type: glob_exists
+        pattern: "src/**/*"
+        description: src folder contains source files
+    fail_feedback: >
+      The project needs clearer evidence of a working React setup. Please include
+      package.json with React dependencies and the source files needed to run the app.
+
+  - id: external_data
+    title: JavaScript Best Practices
+    requirement: Fetch external data into the JavaScript application and prepare it for use.
+    pass_rule: any
+    checks:
+      - id: fetch_used
+        type: file_list_contains_any
+        keywords:
+          - ".json"
+        description: JSON data files exist
+
+      - id: fetch_keyword
+        type: glob_exists
+        pattern: "src/**/*.js"
+        description: JavaScript source files exist for fetch verification
+    fail_feedback: >
+      Please make sure the project loads the provided external JSON data using
+      fetch or an equivalent async data-loading workflow instead of hardcoding all
+      data directly in JavaScript.

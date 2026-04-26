@@ -1,0 +1,48 @@
+project_name: Flask Coffee Shop
+
+sections:
+  - id: flask_setup
+    title: Flask Server Setup
+    requirement: Complete project is submitted and demonstrates Flask server setup.
+    pass_rule: any
+    checks:
+      - id: app_py
+        type: glob_exists
+        pattern: "**/app.py"
+        description: app.py exists
+
+      - id: requirements
+        type: file_exists
+        path: requirements.txt
+        description: requirements.txt exists
+
+      - id: flask_keyword
+        type: file_list_contains_any
+        keywords:
+          - flask
+        description: Flask-related files found
+    fail_feedback: >
+      I could not find enough evidence of a Flask backend setup. Please include
+      the Flask application files and dependency instructions.
+
+  - id: gitignore
+    title: Local Files and Git Ignore
+    requirement: virtual env, pycache, and other local files should be ignored.
+    pass_rule: all
+    checks:
+      - id: gitignore_exists
+        type: file_exists
+        path: .gitignore
+        description: .gitignore exists
+
+      - id: pycache_ignored
+        type: text_contains_any
+        path: .gitignore
+        keywords:
+          - __pycache__
+          - venv
+          - .env
+        description: .gitignore excludes common local files
+    fail_feedback: >
+      Please update .gitignore to exclude virtual environments, __pycache__,
+      environment files, and other local/generated files.
